@@ -106,7 +106,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorButtonNormal"
         android:text="Already have an Account? Sign In"
         android:textAllCaps="false"
         android:textSize="17dp"
