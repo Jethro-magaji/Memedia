@@ -1,5 +1,7 @@
 package com.memes.memedia.service;
 
+import com.memes.memedia.models.MemeTemplate;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,7 +20,7 @@ public class MemeGenerationService {
         Calls the meme generator api and returns urls images of all the available meme formats
      */
 
-    public static String[] getAllTemplates() throws IOException, JSONException {
+    public static MemeTemplate[] getAllTemplates() throws IOException, JSONException {
 
         Request req = new Request.Builder()
                 .url("https://api.imgflip.com/get_memes")
@@ -31,16 +33,16 @@ public class MemeGenerationService {
 
         JSONArray memes = new JSONObject(resBody).getJSONArray("memes");
 
-        String [] allTemplateUrls = new String[memes.length()];
+        MemeTemplate [] allMemeTemplates = new MemeTemplate[memes.length()];
 
         for(int i = 0; i < memes.length(); i++){
 
             JSONObject jobj = memes.getJSONObject(0);
-            allTemplateUrls[i] = jobj.getString(jobj.getString("url"));
+            allMemeTemplates[i] = new MemeTemplate(jobj.getString("url"), jobj.getInt("id"));
 
         }
 
-        return allTemplateUrls;
+        return allMemeTemplates;
 
 
     }
