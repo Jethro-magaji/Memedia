@@ -9,6 +9,7 @@ import android.text.TextUtils
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import com.memes.memedia.MainActivity;
 
 class SignInActivity : AppCompatActivity() {
 
