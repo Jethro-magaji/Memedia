@@ -21,6 +21,8 @@ public class DataRepo {
     /*
      Whenever this object is instantiated, pass the names of the references to keep track of.
      Every time that reference's value changes it's value will be put into a HashMap for easy access
+     Because of the way this works, the page would have to be refreshed every time and new change is
+     to be made
      */
 
     public DataRepo(String ... references){
@@ -30,22 +32,6 @@ public class DataRepo {
         for(final String reference : references){
 
             final DatabaseReference ref = database.getReference(reference);
-
-            ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    refMap.put(reference, snapshot);
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
-
 
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -66,6 +52,46 @@ public class DataRepo {
         }
 
     }
+
+    /*
+
+        Override the above constructor to accept Database references instead of their keys
+
+     */
+
+    public DataRepo(DatabaseReference ... references){
+
+        refMap = new HashMap<String, Object>();
+
+        for(final DatabaseReference reference : references){
+
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    refMap.put(reference.getKey(), snapshot.getValue());
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                    Log.d("ERROR", error.toString());
+
+                }
+            });
+
+
+        }
+
+
+    }
+
+    /*
+
+      Add reference to database, if it exists
+
+     */
 
     public void putToDatabase(String reference, Object value){
 

@@ -62,11 +62,11 @@ public class MemeGenerationService {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://api.imgflip.com/caption_image").newBuilder();
-        urlBuilder.addQueryParameter("username", "MemediaProject");
-        urlBuilder.addQueryParameter("password", "memesproject**");
-        urlBuilder.addQueryParameter("template_id", templateId + "");
-        urlBuilder.addQueryParameter("text0", topText);
-        urlBuilder.addQueryParameter("text1", bottomText);
+        urlBuilder.addQueryParameter("username", "MemediaProject")
+            .addQueryParameter("password", "memesproject**")
+            .addQueryParameter("template_id", templateId + "")
+            .addQueryParameter("text0", topText)
+            .addQueryParameter("text1", bottomText);
         String url = urlBuilder.build().toString();
 
         RequestBody body = RequestBody.create(JSON, "");
