@@ -61,13 +61,13 @@
         android:background="@color/colorPrimary"
         >
 
-            <com.yuyakaido.android.cardstackview.CardStackView
-                android:id="@+id/card_stack_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:clipToPadding="false"/>
-<!--                android:layout_alignParentEnd="true"-->
+        <com.yuyakaido.android.cardstackview.CardStackView
+            android:id="@+id/card_stack_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="8dp" />
+        <!--                android:layout_alignParentEnd="true"-->
 <!--                android:layout_alignParentStart="true"-->
 <!--                android:layout_alignParentTop="true"-->
 <!--                android:layout_alignParentBottom="true"/>-->

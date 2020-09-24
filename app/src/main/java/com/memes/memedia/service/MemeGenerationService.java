@@ -1,6 +1,10 @@
 package com.memes.memedia.service;
 
+import android.widget.ImageView;
+
+import com.memes.memedia.AddMemesActivity;
 import com.memes.memedia.models.MemeTemplate;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -8,6 +12,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -24,32 +30,45 @@ public class MemeGenerationService {
         Calls the meme generator api and returns urls images of all the available meme formats
      */
 
-    public static MemeTemplate[] getAllTemplates() throws IOException, JSONException {
-
-        Request req = new Request.Builder()
-                .url("https://api.imgflip.com/get_memes")
-                .build();
-
-        Response res = client.newCall(req).execute();
-
-        String resBody = res.body().string();
-
-
-        JSONArray memes = new JSONObject(resBody).getJSONObject("data").getJSONArray("memes");
-
-        MemeTemplate [] allMemeTemplates = new MemeTemplate[memes.length()];
-
-        for(int i = 0; i < memes.length(); i++){
-
-            JSONObject jobj = memes.getJSONObject(0);
-            allMemeTemplates[i] = new MemeTemplate(jobj.getString("url"), jobj.getInt("id"));
-
-        }
-
-        return allMemeTemplates;
-
-
-    }
+//    public static void getAllTemplates(final ImageView view, final AddMemesActivity act) throws IOException, JSONException {
+//
+//        Request req = new Request.Builder()
+//                .url("https://api.imgflip.com/get_memes")
+//                .build();
+//
+//        client.newCall(req)
+//                .enqueue(new Callback() {
+//                    @Override
+//                    public void onFailure(Call call, IOException e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onResponse(Call call, Response response) throws IOException {
+//
+//                        String s = response.body().string();
+//                        try {
+//                            JSONArray memes =  new JSONObject(s).getJSONObject("data").getJSONArray("memes");
+//
+//                            MemeTemplate temp = new MemeTemplate(memes.getJSONObject(0).getString("url")
+//                                    , memes.getJSONObject(0).getInt("id"));
+//
+//                            Picasso.get().load(temp.getImageUrl()).into(view);
+//                            act.setTemplateId(temp.getId());
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//
+//                    }
+//                });
+//
+//
+//
+//
+//
+//    }
     /*
 
         Takes the id of a meme template, the top text to insert and the bottom text to insert.

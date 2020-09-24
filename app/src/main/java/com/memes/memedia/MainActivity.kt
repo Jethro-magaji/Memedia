@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.memes.memedia.ui.home.HomeFragment;
 import com.memes.memedia.ui.profile.ProfileFragment;
 import com.memes.memedia.ui.search.SearchFragment;
@@ -40,6 +41,15 @@ class MainActivity : AppCompatActivity()  {
 
 
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
+        val addMeme: FloatingActionButton = findViewById(R.id.fab);
+        addMeme.setOnClickListener {
+
+            val intent = Intent(this, AddMemesActivity::class.java);
+
+            startActivity(intent);
+
+        }
 
         moveToFragment(HomeFragment())
     }
